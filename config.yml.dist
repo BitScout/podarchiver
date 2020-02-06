@@ -1,0 +1,6 @@
+target_dir: podcasts
+feeds:
+    Tagesschau:
+        disabled: false
+        directory_name: tagesschau
+        feed_url: https://www.tagesschau.de/export/video-podcast/webs/tagesschau_https
