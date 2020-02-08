@@ -42,12 +42,14 @@ class PodArchiver {
 			return;
 		}
 		
+		$feedUrl        = $feedConfig['feed_url'];
+		$feedDirName    = $feedConfig['directory_name'];
+		$filenameRegexp = !empty($feedConfig['filename_regexp']) ? $feedConfig['filename_regexp'] : false;
+		$filenameOutput = !empty($feedConfig['filename_output']) ? $feedConfig['filename_output'] : false;
 		
-		$feedUrl     = $feedConfig['feed_url'];
-		$feedDirName = $feedConfig['directory_name'];
-		$feedDir     = sprintf('%s/%s', $this->targetDir, $feedDirName);
+		$feedDir = sprintf('%s/%s', $this->targetDir, $feedDirName);
 		
-		if(!file_exists($feedDir)) {
+		if (!file_exists($feedDir)) {
 			echo "\n\tCreating podcast's target directory";
 			mkdir($feedDir);
 		}
@@ -56,11 +58,28 @@ class PodArchiver {
 		
 		foreach($blogFeed->getPosts() as $post) {
 			$filename = basename($post->enclosure);
-			$targetFilePath = sprintf('%s/%s', $feedDir, $filename);
 			
 			echo "\n\n\t\tTreating file $filename";
 			
-			if(file_exists($targetFilePath)) {
+			if ($filenameRegexp && $filenameOutput) {
+				$filename = preg_replace($filenameRegexp, $filenameOutput, $filename);
+				
+				if ('.' !== dirname($filename)) {
+					$subDir = sprintf('%s/%s', $feedDir, dirname($filename));
+
+					if (!file_exists($subDir)) {
+						mkdir($subDir);
+					}
+				}
+			}
+			
+			$targetFilePath = sprintf('%s/%s', $feedDir, $filename);
+			
+			if ($filenameRegexp && $filenameOutput) {
+				echo "\n\t\tas target filename $filename";
+			}
+			
+			if (file_exists($targetFilePath)) {
 				echo "\n\t\tSkipping because file already exists";
 				
 				continue;
