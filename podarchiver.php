@@ -8,7 +8,7 @@ class PodArchiver {
 	private $config;
 	private $targetDir;
 	
-	public function __construct(string $configFileName = 'config.yml') {
+	public function __construct(string $configFileName = 'config/config.yml') {
 		if(!file_exists($configFileName)) {
 			throw new Exception("Config file not found: $configFileName");
 		}
