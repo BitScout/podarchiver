@@ -6,7 +6,8 @@ RUN mkdir /podcasts /root/config \
 	&& pecl install yaml
 
 WORKDIR /root
-ENTRYPOINT ["/bin/bash"]
 
 COPY *.php /root
 COPY php/php.ini /usr/local/etc/php/
+
+CMD tail -f /dev/null
