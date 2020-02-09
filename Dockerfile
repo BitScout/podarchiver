@@ -1,10 +1,12 @@
-FROM alpine:3.11
+FROM php:7.3-cli
 MAINTAINER Christian Kollross
 
-RUN apk add --update php7 php7-pecl-yaml \
-	&& mkdir /podcasts /root/config
+RUN mkdir /podcasts /root/config \
+	&& apt-get update && apt-get install -y libyaml-dev \
+	&& pecl install yaml
 
 WORKDIR /root
-ENTRYPOINT ["/bin/sh"]
-	
+ENTRYPOINT ["/bin/bash"]
+
 COPY *.php /root
+COPY php/php.ini /usr/local/etc/php/
