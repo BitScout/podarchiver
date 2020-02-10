@@ -4,6 +4,10 @@ PodArchiver is a simple PHP script for archiving podcast episodes that can be co
 
 ## Setup
 
+You can either use this Docker container manually on you own Linux server or on an UnRaid system:
+
+### Manually
+
 To create the Docker container run:
 
 `docker run -d --rm --name podarchiver --mount type=bind,source="$(pwd)"/config,target=/root/config,readonly --mount type=bind,source="$(pwd)"/podcasts,target=/root/podcasts ckollross/podarchiver`
@@ -14,3 +18,9 @@ To create the Docker container run:
 You can then download episodes like this:
 
 `docker exec podarchiver php podarchiver.php`
+
+### UnRaid
+
+To use this on UnRaid, just follow these steps:
+
+TODO

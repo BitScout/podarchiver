@@ -52,12 +52,13 @@ class PodArchiver {
 		if (!file_exists($feedDir)) {
 			echo "\n\tCreating podcast's target directory";
 			mkdir($feedDir);
+			chmod($feedDir, 0777);
 		}
 		
 		$blogFeed = new BlogFeed($feedUrl);
 		
 		foreach($blogFeed->getPosts() as $post) {
-			$filename = basename($post->enclosure);
+			$filename = explode('?', basename($post->enclosure))[0];
 			
 			echo "\n\n\t\tTreating file $filename";
 			
@@ -69,6 +70,7 @@ class PodArchiver {
 
 					if (!file_exists($subDir)) {
 						mkdir($subDir);
+						chmod($subDir, 0777);
 					}
 				}
 			}
@@ -89,8 +91,10 @@ class PodArchiver {
 			
 			$file = file_get_contents($post->enclosure);
 			file_put_contents($targetFilePath, $file);
+			chmod($targetFilePath, 0666);
 			
 			echo "finished";
+			sleep(1);
 		}
 	}
 	
