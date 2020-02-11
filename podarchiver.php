@@ -19,6 +19,7 @@ class PodArchiver {
 	
 	public function run() {
 		echo "\nPodArchiver STARTED\n";
+		echo "\nMemory limit: ".ini_get('memory_limit');
 		
 		if(!file_exists($this->targetDir)) {
 			echo "\nCreating target directory";
