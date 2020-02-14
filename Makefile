@@ -8,3 +8,6 @@ install-default-config: ## Create a first simple config file
 
 run: ## Start downloading episodes using the container
 	docker exec podarchiver php podarchiver.php
+
+php-fix: ## Fix PHP code style
+	 php-cs-fixer fix .
