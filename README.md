@@ -13,8 +13,8 @@ To create the Docker container run:
 
 `docker run -d --rm --name podarchiver --mount type=bind,source="$(pwd)"/config,target=/root/config,readonly --mount type=bind,source="$(pwd)"/podcasts,target=/root/podcasts ckollross/podarchiver`
 
-- The source directory should contain a copy of `config.yml.dist` (renamed `config.yml`).
-- The `podcasts` directory is where the downloaded episodes will be stored.
+- The `config` source directory should contain a copy of `config.yml.dist` (renamed `config.yml`).
+- The `podcasts` source directory is where the downloaded episodes will be stored.
 
 You can then download episodes like this:
 
@@ -46,13 +46,9 @@ Access Mode:    Read/Write
 
 Finally, click `Apply`.
 
-In the "config" folder of your "podcasts" share, create a text file called "config.yml" and copy&paste the following sample configuration:
+In the "config" folder of your "podcasts" share, create a text file called "config.yaml" and copy&paste the following sample configuration:
 
 ```
-# Base directory to which all podcasts will be saved.
-# Keep this value, it represents the "/root/podcasts" inside the Docker container.
-target_dir: podcasts
-
 feeds:
 	# Just a name for displaying purposes, for example in the console output
     Tagesschau:

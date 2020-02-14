@@ -8,13 +8,13 @@ class PodArchiver {
 	private $config;
 	private $targetDir;
 	
-	public function __construct(string $configFileName = 'config/config.yml') {
+	public function __construct(string $configFileName = 'config/config.yaml') {
 		if(!file_exists($configFileName)) {
 			throw new Exception("Config file not found: $configFileName");
 		}
 		
 		$this->config    = yaml_parse_file($configFileName);
-		$this->targetDir = $this->config['target_dir'];
+		$this->targetDir = array_key_exists('target_dir', $this->config) ? $this->config['target_dir'] : 'podcasts';
 	}
 	
 	public function run() {
