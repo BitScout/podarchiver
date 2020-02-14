@@ -18,5 +18,7 @@ feeds:
         filename_regexp: /TV\-(\d{4})(\d{2})(\d{2})\-\d{4}\-\d{4}\.webxl\.h264\.(.*)/
 		
 		# Optional, second parameter for PHP's preg_replace to change the file name on disk.
-		# This may also include subdirectories, such as the episode year in this example:
+		# This may also include subdirectories, such as the episode year in this example.
+		# You can also use the following variables to insert the publication date & time:
+		# `{Y}`, `{m}`, `{d}`, `{H}`, `{i}`, `{s}`
         filename_output: $1/Tagesschau_$1-$2-$3_webxl.$4

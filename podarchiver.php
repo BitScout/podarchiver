@@ -65,6 +65,10 @@ class PodArchiver {
 			
 			if ($filenameRegexp && $filenameOutput) {
 				$filename = preg_replace($filenameRegexp, $filenameOutput, $filename);
+			
+				foreach($this->getVariablesFromTimestamp($post->timestamp) as $field => $value) {
+					$filename = str_replace($field, $value, $filename);
+				}
 				
 				if ('.' !== dirname($filename)) {
 					$subDir = sprintf('%s/%s', $feedDir, dirname($filename));
@@ -99,6 +103,16 @@ class PodArchiver {
 		}
 	}
 	
+	private function getVariablesFromTimestamp($timestamp): array {
+		$fieldNames = str_split('YmdHis');
+		$variables = [];
+		
+		foreach($fieldNames as $field) {
+			$variables[sprintf('{%s}', $field)] = date($field, $timestamp);
+		}
+		
+		return $variables;
+	}
 }
 
 class BlogPost
