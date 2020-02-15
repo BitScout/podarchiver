@@ -21,7 +21,6 @@ class PodArchiver
     public function run()
     {
         echo "\nPodArchiver STARTED\n";
-        echo "\nMemory limit: ".ini_get('memory_limit');
 
         if (!file_exists($this->targetDir)) {
             echo "\nCreating target directory";
@@ -64,14 +63,12 @@ class PodArchiver
         foreach ($blogFeed->getPosts() as $post) {
             $filename = explode('?', basename($post->enclosure))[0];
 
-            echo "\n\n\t\tTreating file {$filename}";
+            echo "\n\n\t\tTreating file ".$filename;
+            echo "\n\t\tTitle: ".$post->title;
 
             if ($filenameRegexp && $filenameOutput) {
                 $filename = preg_replace($filenameRegexp, $filenameOutput, $filename);
-
-                foreach ($this->getVariablesFromTimestamp($post->timestamp) as $field => $value) {
-                    $filename = str_replace($field, $value, $filename);
-                }
+                $filename = $this->replaceFilenameVariables($filename, $post);
 
                 if ('.' !== dirname($filename)) {
                     $subDir = sprintf('%s/%s', $feedDir, dirname($filename));
@@ -86,7 +83,7 @@ class PodArchiver
             $targetFilePath = sprintf('%s/%s', $feedDir, $filename);
 
             if ($filenameRegexp && $filenameOutput) {
-                echo "\n\t\tas target filename {$filename}";
+                echo "\n\t\tas target filename ".$filename;
             }
 
             if (file_exists($targetFilePath)) {
@@ -104,6 +101,15 @@ class PodArchiver
             echo 'finished';
             sleep(1);
         }
+    }
+
+    private function replaceFilenameVariables(string $filename, BlogPost $post): string
+    {
+        foreach ($this->getVariablesFromTimestamp($post->timestamp) as $field => $value) {
+            $filename = str_replace($field, $value, $filename);
+        }
+
+        return $filename;
     }
 
     private function getVariablesFromTimestamp($timestamp): array
