@@ -1,2 +1,19 @@
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.pdf binary
+
 # Auto detect text files and force unix-style line endings
 * text eol=lf
