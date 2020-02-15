@@ -50,23 +50,25 @@ In the "config" folder of your "podcasts" share, create a text file called "conf
 
 ```
 feeds:
-	# Just a name for displaying purposes, for example in the console output
+    # Just a name for displaying purposes, for example in the console output
     Tagesschau:
-		# Optional, set to true to skip this feed. Useful to still keep the config.
+        # Optional, set to true to skip this feed. Useful to still keep the config.
         disabled: false
 		
-		# Mandatory, the URL of the podcast feed
+        # Mandatory, the URL of the podcast feed
         feed_url: https://www.tagesschau.de/export/video-podcast/webxl/tagesschau_https/
 		
-		# Mandatory, directory within the target_dir to which the episodes will be saved
+        # Mandatory, directory within the target_dir to which the episodes will be saved
         directory_name: tagesschau
 		
-		# Optional, first parameter for PHP's preg_replace to change the file name on disk
-		# You can test your own on https://www.phpliveregex.com/#tab-preg-replace
+        # Optional, first parameter for PHP's preg_replace to change the file name on disk
+        # You can test your own on https://www.phpliveregex.com/#tab-preg-replace
         filename_regexp: /TV\-(\d{4})(\d{2})(\d{2})\-\d{4}\-\d{4}\.webxl\.h264\.(.*)/
 		
-		# Optional, second parameter for PHP's preg_replace to change the file name on disk.
-		# This may also include subdirectories, such as the episode year in this example:
+        # Optional, second parameter for PHP's preg_replace to change the file name on disk.
+        # This may also include subdirectories, such as the episode year in this example.
+        # You can also use the following variables to insert the publication date & time:
+        # `{Y}`, `{m}`, `{d}`, `{H}`, `{i}`, `{s}` and `{title}` for the episode title.
         filename_output: $1/Tagesschau_$1-$2-$3_webxl.$4
 ```
 

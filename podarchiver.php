@@ -109,7 +109,7 @@ class PodArchiver
             $filename = str_replace($field, $value, $filename);
         }
 
-        return $filename;
+        return str_replace('{title}', $post->title, $filename);
     }
 
     private function getVariablesFromTimestamp($timestamp): array
@@ -148,7 +148,7 @@ class BlogFeed
             $post            = new BlogPost();
             $post->timestamp = strtotime($item->pubDate);
             $post->enclosure = (string) $item->enclosure->attributes()['url'];
-            $post->title     = (string) $item->title;
+            $post->title     = trim($item->title);
 
             $this->posts[] = $post;
         }
