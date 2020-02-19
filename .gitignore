@@ -1,4 +1,13 @@
-/config/config.yml
-/config/config.yaml
+/podconf/
 /podcasts/
 .php_cs.cache
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###

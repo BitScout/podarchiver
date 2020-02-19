@@ -20,6 +20,8 @@ class PodArchiver
 
     public function run()
     {
+        die('This file has been replaced by the command  bin/console app:download');
+
         echo "\nPodArchiver STARTED\n";
 
         if (!file_exists($this->targetDir)) {

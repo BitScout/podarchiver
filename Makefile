@@ -6,8 +6,11 @@ help: ## Show help
 install-default-config: ## Create a first simple config file
 	cp config.yaml.dist config/config.yaml
 
+build-container: ## Build container for development test
+	docker build -t ckollross/podarchiver:dev .
+
 run: ## Start downloading episodes using the container
-	docker exec podarchiver php podarchiver.php
+	docker exec podarchiver bin/console app:download
 
 php-fix: ## Fix PHP code style
-	 php-cs-fixer fix .
+	bin/php-cs-fixer fix .
