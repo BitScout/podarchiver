@@ -3,6 +3,11 @@
 
 PodArchiver is a simple PHP script for archiving podcast episodes that can be configured in a YAML file.
 
+## Status
+
+- Version 1 is a single PHP script. It works, but the episode titles cannot be modified.
+- Version 2 is under development. It includes a switch to the Symfony framework, which will simplyfy the addition of more complex features, like modifying the episode titles.
+
 ## Setup
 
 You can either use this Docker container manually on you own Linux server or on an UnRaid system:
